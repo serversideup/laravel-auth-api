@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'v1'], function(){
+    Route::get('/user', 'API\UsersController@show');
+
+    Route::post('email/verify/{id}', 'API\EmailVerificationController@verify')->name('verificationapi.verify');
 });
